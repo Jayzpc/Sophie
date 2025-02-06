@@ -68,7 +68,8 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C;
+	margin-bottom: 40px;
 }
 
 h1 > span {
@@ -80,10 +81,11 @@ h1 > span {
 
 h2{
 	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
+	font-weight: 400;
+	font-size: 25px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -97,6 +99,87 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 1000px;
+  	max-width: 1500px;
+  	padding: 20px; 
+  	border-radius: 0px;
+  	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	align-items: center;
+	gap: 10px;
+
+}
+.login-text {
+	color: #1D6154;
+	justify-items: center;
+	margin-left: 100px;
+	margin-bottom: 45px;
+}
+.input-box {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect for inputs */
+	transition: box-shadow 0.3s ease;
+	width: 300px;
+  }
+  
+.input-box:focus {
+	outline: none;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+.login-body {
+	background-color: rgb(255, 255, 252);
+}
+.login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+.signin-button {
+	background-color: #1D6154;
+	padding: 10px 20px; 
+	font-size: 13px; 
+	color: white; 
+	border: none; 
+	border-radius: 16px; 
+	cursor: pointer; 
+	width: 110px;
+	align-items: center;
+	font-family: 'Syne';
+	margin-top: 40px;
+	justify-content: center;
+	display: flex;
+	margin-left: 100px;
+	margin: 20px auto;
+}      
+.Forgot-Password {
+	color: black;
+	margin-left: 100px;
+	margin-top: 10px;
+	font-size: 15px;
+	display: block
+
+}
+.Menu-button {
+	padding: 10px 20px; 
+	font-size: 13px; 
+	color: #1D6154; 
+	border: none; 
+	border-radius: 16px; 
+	cursor: pointer; 
+	font-family: 'Syne';
+	margin: 20px auto;
+	gap: 10px;
+	justify-content: center;
+  	border-radius: 50px;
+	justify-content: space-evenly;
 }
 #introduction {
 	display: flex;
