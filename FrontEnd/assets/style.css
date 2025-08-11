@@ -58,8 +58,15 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
+}
+
+#login {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 h1{
@@ -124,6 +131,21 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+
+.filterButtons {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	gap: 10px;
 }
 .gallery {
 	width: 100%;
