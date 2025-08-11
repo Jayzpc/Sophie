@@ -9,11 +9,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="scripts.js" defer></script>
+	
 
 </head>
 <body>
-<headerLogin>
+<header>
 	<h1>Sophie Bluel <span>Interior Designer</span></h1>
 	<nav>
 		<ul>
@@ -23,20 +23,31 @@
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
-</headerLogin>
+</header>
 <main>
 
 	<h2>Login</h2>
 	<div id="login">
-		<form action="#" method="post">
-			<label for="email">Email</label>
-			<input type="text" name="email" id="email">
-			<label for="password">Password</label>
-			<input type="password" name="password" id="password"> 
-			
-			
-			<input type="submit" value="Sign In">
-		</form>
+	 <form>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" id="email" class="form-control" required>
+            </div>
+            <label for="password">Password</label>
+              <input type="password" id="password" class="form-control" required>
+            </div>
+            <button id="submit-button" type="submit" class="btn btn-primary">
+              Submit
+            </button>
+          </form>
+
+<section class="col-sm-10 offset-sm-1">
+          <p id="response-message"></p>
+          <h2 id="response-title"></h2>
+          <smqll id="response-id"></small>
+          <p id="response-content"></p>
+        </section>
+
 	</div>
 </main>
 
@@ -47,5 +58,6 @@
 		</ul>
 	</nav>
 </footer>
+<script src="assets/script2.js"></script>
 </body>
 </html>
