@@ -133,19 +133,21 @@ li:hover {
 	margin-bottom: 1em;
 }
 
-.filterButtons {
+.filterButton {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 20px;
+	gap: 10px;
 }
 
-.buttons {
+/*the buttons in the filterButtons class */
+.button {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 20px;
 	border-radius: 60px;
 	border: 1px solid #1D6154;
-	gap: 10px;
+	
 }
 .gallery {
 	width: 100%;

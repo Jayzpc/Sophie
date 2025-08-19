@@ -1,132 +1,111 @@
-/*
+document.addEventListener('DOMContentLoaded', () => {
+    // We will store the portfolio works here to avoid fetching them repeatedly
+    let allWorks = [];
 
-You fetch the data and parse it as JSON.
-You select the .gallery element.
-You loop through each item in the data array.
-For each item, you create a figure, img, and figcaption.
-You set the image source and caption text.
-You append the img and figcaption to the figure, and the figure to the gallery.
+    /**
+     * Displays works in the gallery.
+     * @param {Array} works - An array of work objects to display.
+     */
+    function displayWorks(works) {
+        const gallery = document.querySelector('.gallery');
+        // Clear the gallery before displaying new or filtered works
+        gallery.innerHTML = '';
 
+        works.forEach(item => {
+            const figure = document.createElement('figure');
+            const img = document.createElement('img');
+            const figcaption = document.createElement('figcaption');
 
-handle the response */
-// to see what the response looks like
+            img.src = item.imageUrl;
+            figcaption.textContent = item.title;
 
-
-// fetch('http://localhost:5678/api/works',)
-// .then((response => {
-//if (response.ok) { /* Check if the response status is OK (status code 200) */
-//    return response.json();  Parse the response body as JSON */
-
-//}
-//})
-
-// for loop to go through each item in the response and create a figure element for each one
-
-// where on the page the figures will be added
-//.then((data) => {
-//    const gallery = document.querySelector('.gallery');
-//)
-
-//const postsGallery = document.querySelector('gallery.figure');
-
-//let postRequest = new XMLHttpRequest();
-//postRequest.open('GET', 'http://localhost:5678/api/works', true);
-fetch('http://localhost:5678/api/works')
-.then(response => {
-    if (response.ok) {
-    return response.json()
+            figure.appendChild(img);
+            figure.appendChild(figcaption);
+            gallery.appendChild(figure);
+        });
     }
-})
 
-/*
-//postRequest.onreadystatechange = () => {
-//    if (postRequest.readyState === 4) {
+    /**
+     * Creates filter buttons for categories.
+     * @param {Array} categories - An array of category objects.
+     */
+    function createFilterButtons(categories) {
+        // Make sure you have a <div id="filters"></div> in your index.html
+        const filtersContainer = document.getElementById('filters');
+        if (!filtersContainer) return;
 
+        // Create "All" button
+        const allButton = document.createElement('button');
+        allButton.textContent = 'All'; // 
+        allButton.classList.add('button', 'active'); // Start with "All" as active
+        allButton.dataset.categoryId = 'all';
+        filtersContainer.appendChild(allButton);
 
-//const response = JSON.parse(postRequest.response);
+        // Create buttons for each category from the API
+        categories.forEach(category => {
+            const button = document.createElement('button');
+            button.textContent = category.name;
+            button.classList.add('button');
+            // Store the category ID in a data attribute for easy access
+            button.dataset.categoryId = category.id;
+            filtersContainer.appendChild(button);
+        });
 
-*/
-.then(data => {
-   const gallery = document.querySelector('.gallery');
-   for (let index = 0; index < data.length; index++) {
-      const item = data[index];
-      console.log(item); // log each item, not the whole data array
-
-      // create elements to hold the data
-      const figure = document.createElement('figure');
-      const img = document.createElement('img');
-      const figcaption = document.createElement('figcaption');
-
-      img.setAttribute('src', item.imageUrl);
-      figcaption.textContent = item.title;
-
-      figure.appendChild(img);
-      figure.appendChild(figcaption);
-      gallery.appendChild(figure);
-   }
-})
-
-
-
-     
-        fetch('http://localhost:5678/api/categories')
-.then(response => {
-    if (response.ok) {
-    return response.json()
+        // Add a single event listener to the container for all buttons
+        addFilterEventListeners(filtersContainer);
     }
-})
 
-    //    console.log('Button clicked!');
+    /**
+     * Adds event listeners to the filter buttons to handle clicks.
+     * @param {HTMLElement} filtersContainer - The container for the filter buttons.
+     */
+    function addFilterEventListeners(filtersContainer) {
+        filtersContainer.addEventListener('click', (event) => {
+            // Only act if a button was clicked
+            if (event.target.tagName !== 'BUTTON') return;
 
-.then(data => {
-   const all = document.getElementById('all');
-   // index =0 is all, index 2 is Hotels and restaurants
+            const clickedButton = event.target;
+            const categoryId = clickedButton.dataset.categoryId;   //dataset is same as querySelector
 
-   for (let index = 2; index < data.length; index++) {
-      const categoryId = data[index];
-      console.log(categoryId); // log each item, not the whole data array
+            // Update active state for buttons
+            const allButtons = filtersContainer.querySelectorAll('.button');
+            allButtons.forEach(btn => btn.classList.remove('active'));
+            clickedButton.classList.add('active');
 
-      const name = document.createElement('name');
-      const img = document.createElement('img');
-      const figcaption = document.createElement('figcaption');
+            // Filter and display works based on the clicked category
+            if (categoryId === 'all') {
+                displayWorks(allWorks);
+            } else {
+                const filteredWorks = allWorks.filter(work => work.categoryId == categoryId);
+                displayWorks(filteredWorks);
+            }
+        });
+    }
 
-   //   img.setAttribute('src', categoryId.imageUrl);
-   //   figcaption.textContent = categoryId.title;
+    /**
+     * Main function to fetch data and initialize the page.
+     * Using async/await for cleaner asynchronous code.
+     */
+    async function initializePage() {
+        try {
+            // Fetch works
+            const worksResponse = await fetch('http://localhost:5678/api/works');
+            if (!worksResponse.ok) throw new Error('Failed to fetch works');
+            allWorks = await worksResponse.json();
+            displayWorks(allWorks);
 
-     // figure.appendChild(img);
-    //  figure.appendChild(figcaption);
-    //  all.appendChild(figure);
-   }
-})
-  //  const myButton = document.getElementById('objects');
-  //  all.addEventListener('click', function() {
+            // Fetch categories and create buttons
+            const categoriesResponse = await fetch('http://localhost:5678/api/categories');
+            if (!categoriesResponse.ok) throw new Error('Failed to fetch categories');
+            const categories = await categoriesResponse.json();
+            createFilterButtons(categories);
+        } catch (error) {
+            console.error('Initialization failed:', error);
+            const gallery = document.querySelector('.gallery');
+            if (gallery) gallery.innerHTML = '<p>Error loading projects.</p>';
+        }
+    }
 
-// gallery.appendChild(figcaption)
-//img
-//newGallery.appendChild(newTitle);
-//newGallery.appendChild(newImageUrl);
-
-//postsGallery.appendChild(newGallery);
-
-//postRequest.send();
-
-//const filterButtons = document.querySelector('filterButtons');
-/*const all = document.getElementById('all');
-const objects = document.getElementById('objects');
-const apartments = document.getElementById('apartments');
-const hotels = document.getElementById('hotels');
-
-all.addEventListener('click', () => {
-    console.log();
-}); 
-
-/*objects.addEventListener('click', () => {
-    console.log('Objects button clicked');
+    // Run the initialization when the DOM is loaded
+    initializePage();
 });
-
-apartments.addEventListener('click', () => {
-    console.log('Apartments button clicked');
-});
-
-hotels.addEventListener('click', () => {
-    console.log('Hotels button clicked'); */
