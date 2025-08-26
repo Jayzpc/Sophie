@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Main function to fetch data and initialize the page.
-     * Using async/await for cleaner asynchronous code.
+     * Using async/await as per notes
      */
     async function initializePage() {
         try {
