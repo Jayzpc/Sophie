@@ -23,6 +23,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	background-color: #FFFEF8;
+	text-decoration: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -106,9 +107,8 @@ section {
 	gap: 20px;
 
 }
-form {
-	gap:20px;
-}
+
+
 
 h1{
 	display: flex;
@@ -213,14 +213,14 @@ margin: auto;
 #contact h2{
 	margin-bottom: 20px;
 }
-.form-group {
+#contact form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#input {
+#contact input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -229,7 +229,7 @@ margin: auto;
 #contact label {
 	margin: 2em 0 1em 0;
 }
-#textarea {
+#contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -257,3 +257,63 @@ footer nav ul {
 	margin: 2em
 }
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 200px;
+  right: 200px;
+  background-color: #fefefe;
+  width: 50%;
+  height: 50%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  /*background-color: #5cb85c;
+  color: white; */
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+ /* background-color: #5cb85c;
+  color: white; */
+}
