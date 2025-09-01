@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	background-color: #FFFEF8;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -30,6 +31,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
         /* Hide an element by default */
@@ -38,7 +42,7 @@ body {
         }
 
         /* Display the element only when the user is logged in */
-       # editHead .my-secret-content {
+       #editHead .my-secret-content {
             display: block; /* or flex, grid, etc. */
         }
 
@@ -52,7 +56,10 @@ body {
 	text-align: center;
         }
 
+main {
+	flex-grow: 1;
 
+}
 
 
 ol, ul {
@@ -93,8 +100,14 @@ section {
 
 #login {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	gap: 20px;
+
+}
+form {
+	gap:20px;
 }
 
 h1{
@@ -200,14 +213,14 @@ margin: auto;
 #contact h2{
 	margin-bottom: 20px;
 }
-#contact form {
+.form-group {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -216,7 +229,7 @@ margin: auto;
 #contact label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+#textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -230,6 +243,12 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+}
+#submit-button {
+	background-color: #1D6154;
+	cursor: pointer;
+	border-radius: 20px;
+	color: white;
 }
 
 footer nav ul {
