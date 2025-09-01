@@ -92,8 +92,26 @@ header {
 }
 
 
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
 
+#form-group input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
 
+#form-group label {
+	margin: 2em 0 1em 0;
+}
+
+#form-group textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
 
 section {
 	margin: 50px 0
