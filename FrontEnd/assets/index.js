@@ -1,3 +1,52 @@
+    function checkLoginStatus() {
+        const authToken = sessionStorage.getItem('authToken');
+        const loginLink = document.querySelector('header nav ul li a[href="login.html"]');
+
+        if (authToken) {
+            console.log("User is logged in.");
+            document.body.classList.add('logged-in');
+
+            if (loginLink) {
+                loginLink.textContent = 'logout';
+                loginLink.href = '#';
+                loginLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    sessionStorage.removeItem('authToken');
+                    window.location.reload(); // Reload to reflect logged-out state
+                });
+            }
+        } else {
+            console.log("User is not logged in.");
+            // No need to do anything, the absence of 'logged-in' class will hide elements
+        }
+    }
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // We will store the portfolio works here to avoid fetching them repeatedly
     let allWorks = [];
@@ -7,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {Array} works - An array of work objects to display.
      */
     function displayWorks(works) {
-        const gallery = document.querySelector('.gallery');
+        const gallery = document.querySelector('#portfolio .gallery');
         // Clear the gallery before displaying new or filtered works
         gallery.innerHTML = '';
 
@@ -101,37 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
             createFilterButtons(categories);
         } catch (error) {
             console.error('Initialization failed:', error);
-            const gallery = document.querySelector('.gallery');
+            const gallery = document.querySelector('#portfolio .gallery');
             if (gallery) gallery.innerHTML = '<p>Error loading projects.</p>';
         }
     }
 
     // Run the initialization when the DOM is loaded
     initializePage();
+   checkLoginStatus(); 
 });
-
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}

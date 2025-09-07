@@ -42,13 +42,15 @@ body {
             display: none;
         }
 
-        /* Display the element only when the user is logged in */
+        /* Display the element  user is logged in */
        #editHead .my-secret-content {
-            display: block; /* or flex, grid, etc. */
+            display: block; 
+	
         }
 
-        /* Change the color of a header when logged in */
+        /* Change the color of a header when logged in and some css*/
          #editHead {
+			
             	width: 100%;
 	height: 59px;
 	background-color: #000000;
@@ -56,6 +58,21 @@ body {
 	align-content: center;
 	text-align: center;
         }
+
+/* Hide admin elements by default */ 
+#editHead, #myBtn {
+	display: none; 
+}
+
+body.logged-in #editHead {
+	display: flex;
+			justify-content: center;
+	text-align: center;
+}
+
+body.logged-in #myBtn {
+	display: inline;
+}
 
 main {
 	flex-grow: 1;
@@ -190,6 +207,10 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+
+body.logged-in .filterButton {
+	display: none;
 }
 
 .filterButton {
