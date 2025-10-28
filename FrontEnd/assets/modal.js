@@ -21,27 +21,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const trash = document.createElement('button');
 trash.textContent = "trash"; // You can replace this with an actual trash bin icon/image
 trash.classList.add('trash');
+figure.classList.add('positioned-element');
 
 
 
 
-
-            const img = document.createElement('img');
+            const modalimg = document.createElement('img');
             /*const figcaption = document.createElement('figcaption');*/
             const addphoto = document.createElement('button');
-
+figure.appendChild(trash);
 
 
             
                 img.src = item.imageUrl;
                 /*figcaption.textContent = item.title; */
 
-                figure.appendChild(img);
+                figure.appendChild(modalimg);
                 /*figure.appendChild(figcaption);*/
                 modalpop.appendChild(figure);
 
           
-                modalpop.appendChild(trash);
+                
 
             
 
