@@ -33,7 +33,9 @@ figure.appendChild(trash);
 
 
             
-                img.src = item.imageUrl;
+                modalimg.src = item.imageUrl;
+                modalimg.classList.add('modalimage');
+               
                 /*figcaption.textContent = item.title; */
 
                 figure.appendChild(modalimg);
