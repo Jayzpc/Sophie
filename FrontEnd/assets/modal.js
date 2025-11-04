@@ -17,66 +17,91 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
             const trash = document.createElement('button');
-trash.textContent = "trash"; // You can replace this with an actual trash bin icon/image
-trash.classList.add('trash');
-figure.classList.add('positioned-element');
+            trash.addEventListener('click', async (event) => {
+                
+                const authToken = sessionStorage.getItem('authToken');
+                try {
+                    const tokenResponse = await fetch('http://localhost:5678/api/works/' + item.id, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': 'Bearer ' + authToken
+                        }
+                    });
+                    figure.remove();
+                } catch (error) {
+                    console.error('Error deleting work:', error);
+                }
+
+            });
+
+
+
+                trash.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+                /*trash.textContent = "trash"; // You can replace this with an actual trash bin icon/image */
+                trash.classList.add('trash');
+                figure.classList.add('positioned-element');
 
 
 
 
-            const modalimg = document.createElement('img');
-            /*const figcaption = document.createElement('figcaption');*/
-            const addphoto = document.createElement('button');
-figure.appendChild(trash);
+                const modalimg = document.createElement('img');
+                /*const figcaption = document.createElement('figcaption');*/
+                const addphoto = document.createElement('button');
+                figure.appendChild(trash);
 
 
-            
+
                 modalimg.src = item.imageUrl;
                 modalimg.classList.add('modalimage');
-               
+
                 /*figcaption.textContent = item.title; */
 
                 figure.appendChild(modalimg);
                 /*figure.appendChild(figcaption);*/
                 modalpop.appendChild(figure);
 
-          
-                
+/*
 
-            
+Const addphoto = document.createElement('p');
 
+  const trash = document.createElement('button');
+            trash.addEventListener('click', async (event) => {
 
+*/
 
-
-        });
-    }
+            });
+        }
 
 
 
     async function initializePage() {
-        try {
-            // Fetch works
-            const worksResponse = await fetch('http://localhost:5678/api/works');
-            if (!worksResponse.ok) throw new Error('Failed to fetch works');
-            allWorks = await worksResponse.json();
-            displayWorks(allWorks);
+                try {
+                    // Fetch works
+                    const worksResponse = await fetch('http://localhost:5678/api/works');
+                    if (!worksResponse.ok) throw new Error('Failed to fetch works');
+                    allWorks = await worksResponse.json();
+                    displayWorks(allWorks);
 
-            // Fetch categories and create buttons
-            const categoriesResponse = await fetch('http://localhost:5678/api/categories');
-            if (!categoriesResponse.ok) throw new Error('Failed to fetch categories');
-            const categories = await categoriesResponse.json();
-            /* createFilterButtons(categories); */
-        } catch (error) {
-            console.error('Initialization failed:', error);
+                    // Fetch categories and create buttons
+                    const categoriesResponse = await fetch('http://localhost:5678/api/categories');
+                    if (!categoriesResponse.ok) throw new Error('Failed to fetch categories');
+                    const categories = await categoriesResponse.json();
+                    /* createFilterButtons(categories); */
+                } catch (error) {
+                    console.error('Initialization failed:', error);
 
-            const modalpop = document.querySelector('.modal-body');
-            if (modalpop) modalpop.innerHTML = '<p>Error loading modal.</p>';
-        }
+                    const modalpop = document.querySelector('.modal-body');
+                    if (modalpop) modalpop.innerHTML = '<p>Error loading modal.</p>';
+                }
 
-    }
+            }
+
+
+
+
 
     initializePage();
 
-})
+    })
