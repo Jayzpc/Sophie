@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const title = file.name.replace(/\.[^/.]+$/, '');
             fd.append('title', title || 'Uploaded');
             fd.append('category', 1);
+            
 
             const token = sessionStorage.getItem('authToken');
             try {
