@@ -1,111 +1,173 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // We will store the portfolio works here to avoid fetching them repeatedly
-    let allWorks = [];
+/*
 
-    /**
-     * Displays works in the gallery.
-     * @param {Array} works - An array of work objects to display.
-     */
-    function displayWorks(works) {
+You fetch the data and parse it as JSON.
+You select the .gallery element.
+You loop through each item in the data array.
+For each item, you create a figure, img, and figcaption.
+You set the image source and caption text.
+You append the img and figcaption to the figure, and the figure to the gallery.
+
+
+handle the response */
+// to see what the response looks like
+
+
+// fetch('http://localhost:5678/api/works',)
+// .then((response => {
+//if (response.ok) { /* Check if the response status is OK (status code 200) */
+//    return response.json();  Parse the response body as JSON */
+
+//}
+//})
+
+// for loop to go through each item in the response and create a figure element for each one
+
+// where on the page the figures will be added
+//.then((data) => {
+//    const gallery = document.querySelector('.gallery');
+//)
+
+//const postsGallery = document.querySelector('gallery.figure');
+
+//let postRequest = new XMLHttpRequest();
+//postRequest.open('GET', 'http://localhost:5678/api/works', true);
+fetch('http://localhost:5678/api/works')
+    .then(response => {
+        if (response.ok) {
+            return response.json()
+        }
+    })
+
+    /*
+    //postRequest.onreadystatechange = () => {
+    //    if (postRequest.readyState === 4) {
+    
+    
+    //const response = JSON.parse(postRequest.response);
+    
+    */
+    .then(data => {
         const gallery = document.querySelector('.gallery');
-        // Clear the gallery before displaying new or filtered works
-        gallery.innerHTML = '';
+        for (let index = 0; index < data.length; index++) {
+            const item = data[index];
+            console.log(item); // log each item, not the whole data array
 
-        works.forEach(item => {
+            // create elements to hold the data
             const figure = document.createElement('figure');
             const img = document.createElement('img');
             const figcaption = document.createElement('figcaption');
 
-            img.src = item.imageUrl;
+            img.setAttribute('src', item.imageUrl);
             figcaption.textContent = item.title;
 
             figure.appendChild(img);
             figure.appendChild(figcaption);
             gallery.appendChild(figure);
-        });
-    }
-
-    /**
-     * Creates filter buttons for categories.
-     * @param {Array} categories - An array of category objects.
-     */
-    function createFilterButtons(categories) {
-        // Make sure you have a <div id="filters"></div> in your index.html
-        const filtersContainer = document.getElementById('filters');
-        if (!filtersContainer) return;
-
-        // Create "All" button
-        const allButton = document.createElement('button');
-        allButton.textContent = 'All'; // 
-        allButton.classList.add('button', 'active'); // Start with "All" as active
-        allButton.dataset.categoryId = 'all';
-        filtersContainer.appendChild(allButton);
-
-        // Create buttons for each category from the API
-        categories.forEach(category => {
-            const button = document.createElement('button');
-            button.textContent = category.name;
-            button.classList.add('button');
-            // Store the category ID in a data attribute for easy access
-            button.dataset.categoryId = category.id;
-            filtersContainer.appendChild(button);
-        });
-
-        // Add a single event listener to the container for all buttons
-        addFilterEventListeners(filtersContainer);
-    }
-
-    /**
-     * Adds event listeners to the filter buttons to handle clicks.
-     * @param {HTMLElement} filtersContainer - The container for the filter buttons.
-     */
-    function addFilterEventListeners(filtersContainer) {
-        filtersContainer.addEventListener('click', (event) => {
-            // Only act if a button was clicked
-            if (event.target.tagName !== 'BUTTON') return;
-
-            const clickedButton = event.target;
-            const categoryId = clickedButton.dataset.categoryId;   //dataset is same as querySelector
-
-            // Update active state for buttons
-            const allButtons = filtersContainer.querySelectorAll('.button');
-            allButtons.forEach(btn => btn.classList.remove('active'));
-            clickedButton.classList.add('active');
-
-            // Filter and display works based on the clicked category
-            if (categoryId === 'all') {
-                displayWorks(allWorks);
-            } else {
-                const filteredWorks = allWorks.filter(work => work.categoryId == categoryId);
-                displayWorks(filteredWorks);
-            }
-        });
-    }
-
-    /**
-     * Main function to fetch data and initialize the page.
-     * Using async/await as per notes
-     */
-    async function initializePage() {
-        try {
-            // Fetch works
-            const worksResponse = await fetch('http://localhost:5678/api/works');
-            if (!worksResponse.ok) throw new Error('Failed to fetch works');
-            allWorks = await worksResponse.json();
-            displayWorks(allWorks);
-
-            // Fetch categories and create buttons
-            const categoriesResponse = await fetch('http://localhost:5678/api/categories');
-            if (!categoriesResponse.ok) throw new Error('Failed to fetch categories');
-            const categories = await categoriesResponse.json();
-            createFilterButtons(categories);
-        } catch (error) {
-            console.error('Initialization failed:', error);
-            const gallery = document.querySelector('.gallery');
-            if (gallery) gallery.innerHTML = '<p>Error loading projects.</p>';
         }
-    }
+    })
 
-    // Run the initialization when the DOM is loaded
-    initializePage();
+
+// setup filters and categories
+// fetch categories from the API
+// fetch('http://localhost:5678/api/categories')
+
+fetch('http://localhost:5678/api/categories')
+    .then(response => {
+        if (response.ok) {
+            return response.json()
+        }
+    })
+
+    //    console.log('Button clicked!');
+
+    .then(data => {
+
+        //this constant is where we put our buttons
+        // see line 43 in index.html to see where the id filters is
+        const filters = document.getElementById('filters');
+
+        //we create allFilter button with createElement
+        const allFilter = document.createElement('button');
+
+        // we create a class of the button and set it
+        // this is the class that is used in the CSS
+        // its like addClassList in jQuery
+        allFilter.setAttribute('class', 'button');
+        // creates the all button with TextContent
+        allFilter.textContent = 'All';
+  })      
+
+ const filters = document.getElementById('filters');
+const objectFilter = document.createElement('button');
+objectFilter.setAttribute('class', 'button');
+objectFilter.textContent = 'object';
+
+
+
+
+
+
+filters.appendChild(allFilter);
+        // the for loop gets all the categories from the API
+        // index =0 is all, index 2 is Hotels and restaurants
+        for (let index = 0; index < data.length; index++) {
+
+
+       
+
+            const category = data[index];
+            console.log(category.name); // 
+
+
+            const filterButton = document.createElement('button');
+
+             // we create a class of the button and set it
+        // this is the class that is used in the CSS
+        // its like addClassList in jQuery
+        filterButton.setAttribute('class', 'button active');
+        // creates the all button with TextContent
+        filterButton.textContent = category.name;
+
+filterButton.addEventListener('click', () => {
+            // toggle on and off the active class
+            // remove the active class from all buttons
+            const activeButtons = document.querySelector('.active');
+        //    activeButton.classList.remove('active');
+            
+
+})
+
+        }
+    
+//  const myButton = document.getElementById('objects');
+//  all.addEventListener('click', function() {
+
+// gallery.appendChild(figcaption)
+//img
+//newGallery.appendChild(newTitle);
+//newGallery.appendChild(newImageUrl);
+
+//postsGallery.appendChild(newGallery);
+
+//postRequest.send();
+
+//const filterButtons = document.querySelector('filterButtons');
+/*const all = document.getElementById('all');
+const objects = document.getElementById('objects');
+const apartments = document.getElementById('apartments');
+const hotels = document.getElementById('hotels');
+
+all.addEventListener('click', () => {
+    console.log();
+}); 
+
+/*objects.addEventListener('click', () => {
+    console.log('Objects button clicked');
 });
+
+apartments.addEventListener('click', () => {
+    console.log('Apartments button clicked');
+});
+
+hotels.addEventListener('click', () => {
+    console.log('Hotels button clicked'); */

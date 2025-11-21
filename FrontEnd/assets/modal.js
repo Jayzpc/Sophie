@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             trash.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
-            /*trash.textContent = "trash"; // You can replace this with an actual trash bin icon/image */
+            /*trash.textContent = "trash"; //  */
             trash.classList.add('trash');
             figure.classList.add('positioned-element');
 
@@ -63,7 +63,48 @@ document.addEventListener('DOMContentLoaded', () => {
             modalpop.appendChild(figure);
 
         });
-    } 
+
+    }
+
+    // Upload helper (safe stub removed) and wiring for the upload form
+    (function wireUploadForm() {
+        const form = document.getElementById('photoUpload');
+        const fileInput = document.getElementById('uploadImage');
+        if (!form || !fileInput) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const file = fileInput.files[0];
+            if (!file) return alert('Please choose a file to upload.');
+
+            const fd = new FormData();
+            fd.append('image', file);
+            const title = file.name.replace(/\.[^/.]+$/, '');
+            fd.append('title', title || 'Uploaded');
+            fd.append('category', 1);
+
+            const token = sessionStorage.getItem('authToken');
+            try {
+                const res = await fetch('http://localhost:5678/api/works', {
+                    method: 'POST',
+                    headers: token ? { 'Authorization': 'Bearer ' + token } : {},
+                    body: fd
+                });
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || res.statusText);
+                }
+                const newWork = await res.json();
+                allWorks.push(newWork);
+                displayWorks(allWorks);
+                form.reset();
+                alert('Upload successful');
+            } catch (err) {
+                console.error('Upload failed', err);
+                alert('Upload failed: ' + err.message);
+            }
+        });
+    })();
 
     async function initializePage() {
                     try {
@@ -89,7 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+   
 
 
-        initializePage();
+initializePage();
+
+   
+   
     });
