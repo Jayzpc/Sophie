@@ -50,17 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 // Login successful
                 localStorage.setItem('authToken', data.token);
-
-                  if (localStorage.getItem('authToken')) {
-        // User is likely logged in
-        console.log("User is logged in.");
-    } else {
-        // User is not logged in
-        console.log("User is not logged in.");
-    }
-         //       window.location.href = 'index.html'; // Redirect to the main page
-
-                document.body.classList.add('logged-in'); // Add logged-in class to body for edit mode
+                window.location.href = 'index.html'; // Redirect to the main page
             })
             .catch(error => {
                 // Handle login errors

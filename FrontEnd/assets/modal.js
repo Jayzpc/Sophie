@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
 
-
+    }
 
     // Upload helper (safe stub removed) and wiring for the upload form
     (function wireUploadForm() {
@@ -78,11 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!file) return alert('Please choose a file to upload.');
 
             const fd = new FormData(form);
-        /*    fd.append('image', file);
-            const title = file.name.replace(/\.[^/.]+$/, '');
-            fd.append('title', title || 'Uploaded');
-            fd.append('category', 1);
-          */  
+            /*    fd.append('image', file);
+                const title = file.name.replace(/\.[^/.]+$/, '');
+                fd.append('title', title || 'Uploaded');
+                fd.append('category', 1);
+              */
 
             const token = sessionStorage.getItem('authToken');
             try {
@@ -107,41 +107,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     })();
 
- const goToUploadPage = document.createElement('button');
 
-goToUploadPage.addEventListener('click', function() {
+
+    const goToUploadPage = document.createElement('button');
+    goToUploadPage.addEventListener('click', function () {
         alert('Button clicked!');
     });
 
     async function initializePage() {
-                    try {
-                        // Fetch works
-                        const worksResponse = await fetch('http://localhost:5678/api/works');
-                        if (!worksResponse.ok) throw new Error('Failed to fetch works');
-                        allWorks = await worksResponse.json();
-                        displayWorks(allWorks);
+        try {
+            // Fetch works
+            const worksResponse = await fetch('http://localhost:5678/api/works');
+            if (!worksResponse.ok) throw new Error('Failed to fetch works');
+            allWorks = await worksResponse.json();
+            displayWorks(allWorks);
 
-                        // Fetch categories and create buttons
-                        const categoriesResponse = await fetch('http://localhost:5678/api/categories');
-                        if (!categoriesResponse.ok) throw new Error('Failed to fetch categories');
-                        const categories = await categoriesResponse.json();
-                        /* createFilterButtons(categories); */
-                    } catch (error) {
-                        console.error('Initialization failed:', error);
+            // Fetch categories and create buttons
+            const categoriesResponse = await fetch('http://localhost:5678/api/categories');
+            if (!categoriesResponse.ok) throw new Error('Failed to fetch categories');
+            const categories = await categoriesResponse.json();
+            /* createFilterButtons(categories); */
+        } catch (error) {
+            console.error('Initialization failed:', error);
 
-                        const modalpop = document.querySelector('.modal-body');
-                        if (modalpop) modalpop.innerHTML = '<p>Error loading modal.</p>';
-                    }
+            const modalpop = document.querySelector('.modal-body');
+            if (modalpop) modalpop.innerHTML = '<p>Error loading modal.</p>';
+        }
 
-                }
-
-
-
-   
+    }
 
 
-initializePage();
 
-   
-   
-    });
+
+
+
+    initializePage();
+
+
+
+});
