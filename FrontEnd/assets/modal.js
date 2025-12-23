@@ -64,23 +64,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
 
-   
+
         modalpop.appendChild(button);
 
     }
 
-     const button = document.createElement('button');
-        button.textContent = "Upload Photo";
-        button.addEventListener('click', () => {
-            const closeBtn = document.querySelector('.modal-header .close');
+    const button = document.createElement('button');
+    button.textContent = "Upload Photo";
+    button.addEventListener('click', () => {
+        const closeBtn = document.querySelector('.modal-header .close');
 
-            // Navigate to upload page or show upload form
-            // window.location.href = 'upload.html';
-            closeBtn.classList.add('galleryAdd');
-        });
+        // Navigate to upload page or show upload form
+        // window.location.href = 'upload.html';
+        closeBtn.classList.add('galleryAdd');
+    });
 
 
-    
+
     // Upload   
     (function wireUploadForm() {
         const form = document.getElementById('photoUpload');

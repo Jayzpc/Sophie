@@ -450,13 +450,29 @@ gap: 20px; /* spaces between modal images */
 }
 
 /* The Close Button */
-.close {
-  color: black;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  width: auto;
+
+.popover-content {
+  position: relative; /* Needed for absolute positioning of the close button */
+  padding: 1rem;
 }
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem; /* Adjust size as needed */
+  cursor: pointer;
+  color: #333;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+
+
 
 
 .modal-header {

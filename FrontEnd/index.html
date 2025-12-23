@@ -65,12 +65,14 @@
 					<div class="modal-header">
 
 
-						<button type="button" class="close" popovertarget="myModal" popovertargetaction="hide"></button>
+						<button type="button" class="close-btn" popovertarget="myModal" popovertargetaction="hide" aria-label="Close">
+						&times;
+					</button>
 						<h2>Photo Gallery</h2>
 					</div>
 					<div class="modal-body">
 						<!-- <button onclick="alert('Button Clicked!')">Click Me</button> -->
-						<div class="galleryAdd" class="gallery-content-show">
+						<div class="gallery-content-show">
 
 						</div>
 						<form id="photoUpload" class="photoUpload">
@@ -102,7 +104,7 @@
 						</form>
 
 						<!-- dynamic js to add photos in modal -->
-						<div class="galleryTrash" class="gallery-content">
+						<div class="upload-content">
 							<button id="gallery-add-button" class="gallery-add-button" type="button">add image<i
 									class="fa-solid fa-arrow-left"></i>
 								<div class="trash"></div>
@@ -112,7 +114,12 @@
 					<!--	<button id="gallery-back" class="gallery-back" type="button"><i
 								class="fa-solid fa-arrow-left">Back</i>Back</button>-->
 
-						<button type="button" class="close" popovertarget="myModal" popovertargetaction="hide"></button>
+						<button type="button" class="close-btn" popovertarget="myModal" popovertargetaction="hide" aria-label="Close">
+						&times;
+
+
+						</button>
+						
 					</div>
 
 
