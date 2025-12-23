@@ -52,7 +52,7 @@
 <!-- <h2>My Projects <button type="button"  popovertarget="myModal"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
 			</h2>
 -->
-
+<!-- The Modal  - main edit button myBtn class active --                           -->
 			<h2>My Projects <button type="button" id="myBtn" popovertarget="myModal"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
 			</h2>
 
@@ -65,10 +65,11 @@
 					<div class="modal-header">
 
 
-						<button type="button" class="close" popovertarget="myModal, popovertarget="hide">&times;</button>
+						<button type="button" class="close" popovertarget="myModal" popovertargetaction="hide"></button>
 						<h2>Photo Gallery</h2>
 					</div>
 					<div class="modal-body">
+						<!-- <button onclick="alert('Button Clicked!')">Click Me</button> -->
 						<div class="galleryAdd" class="gallery-content-show">
 
 						</div>
@@ -108,10 +109,15 @@
 							</button>
 
 						</div>
-						<button id="gallery-back" class="gallery-back" type="button"><i
-								class="fa-solid fa-arrow-left">Back</i>
-							Back</button>
+					<!--	<button id="gallery-back" class="gallery-back" type="button"><i
+								class="fa-solid fa-arrow-left">Back</i>Back</button>-->
+
+						<button type="button" class="close" popovertarget="myModal" popovertargetaction="hide"></button>
 					</div>
+
+
+
+
 				</div>
 			</div>
 
